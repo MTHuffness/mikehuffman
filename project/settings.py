@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'd5tr8g_g&rmkdzrmo+smaegz)1_7k0(kp*-py45$i805e5ad48'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+TEMPLATE_DEBUG = DEBUG
+
+ALLOWED_HOSTS = ['mikehuffman.info', '159.65.68.124']
 
 
 # Application definition
@@ -103,5 +105,4 @@ DEFAULT_CHARSET = 'utf-8'
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'site_app/static'),)
-
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)

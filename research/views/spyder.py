@@ -13,7 +13,7 @@ pd.set_option('display.width', 1000)
 expire_after = timedelta(days=1)
 #requests_cache.install_cache('nobel_pages', backend='sqlite', expire_after=expire_after)
 
-symbol = 'tsla'
+symbol = 'nvda'
 form = '10-Q'
 financial_report = 'Consolidated Balance Sheets (Unaudited)'
 base_url = 'https://www.sec.gov'
@@ -118,9 +118,45 @@ def retrieve_all_tables(x):
     return list_of_dataframes
 
 
+def retrieve_financial_statements(x):
+    """
+    this function looks through the entire list of databases from retrieve_all_tables() and
+    searches for the statements that contain the contents within a financial statement and
+    returns a list of these statements. the goal is to scale the function to return the 3
+    primary financial statements for any symbol selected.
+    :param x: the list of databases from the retrieve_all_tables() function
+    :return: a list of databases that contain only the 3 primary financial statements.
+    """
+    financial_reports = []
+    for each_df in x:
+        if 'total assets' in each_df.index.map(str.lower) and 'total liabilities' in each_df.index.map(str.lower) \
+                or 'current assets' in each_df.index.map(str.lower) \
+                and 'current liabilities' in each_df.index.map(str.lower):
+            financial_reports.append(each_df)
+
+    for each_df in x:
+        if ('revenues' in each_df.index.map(str.lower)
+            or 'revenues:' in each_df.index.map(str.lower) or 'net sales' in each_df.index.map(str.lower)) \
+                and 'net income' in each_df.index.map(str.lower):
+            financial_reports.append(each_df)
+
+    for each_df in x:
+        if 'cash flows from operating activities' in each_df.index.map(str.lower) \
+                or 'cash flows from operating activities:' in each_df.index.map(str.lower) \
+                or 'operating activities' in each_df.index.map(str.lower) \
+                or 'operating activities:' in each_df.index.map(str.lower):
+            financial_reports.append(each_df)
+
+    return financial_reports
+
+
 full_form_links = [get_company_financial_link(beautiful_soup_generator(x)) for x in broad_form_links]
 print(full_form_links)
 
 bs4_data = beautiful_soup_generator(full_form_links[0])
 get_every_form_on_the_statement = retrieve_all_tables(bs4_data)
 # print(get_that_form)
+
+get_three_financial_statements = retrieve_financial_statements(get_every_form_on_the_statement)
+print(len(get_three_financial_statements))
+print(get_three_financial_statements)

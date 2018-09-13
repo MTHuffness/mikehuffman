@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="58d25f69-4167-4b3d-9d5c-00553c6829b5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/views/scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/views/scraper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/research/views/spyder.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/views/spyder.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/project$spyder.coverage" NAME="spyder Coverage Results" MODIFIED="1536708141608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research/views" />
+    <SUITE FILE_PATH="coverage/project$spyder.coverage" NAME="spyder Coverage Results" MODIFIED="1536881087462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research/views" />
     <SUITE FILE_PATH="coverage/project$scraper.coverage" NAME="scraper Coverage Results" MODIFIED="1536708075046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research/views" />
     <SUITE FILE_PATH="coverage/project$views.coverage" NAME="views Coverage Results" MODIFIED="1536436892968" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research" />
   </component>
@@ -25,12 +23,12 @@
     <session id="538013104">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.5" value="4" />
+          <entry key="project.open.time.5" value="5" />
           <entry key="project.open.time.6" value="4" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -56,7 +54,7 @@
           <entry key="css" value="53" />
           <entry key="html" value="1517" />
           <entry key="js" value="7" />
-          <entry key="py" value="8029" />
+          <entry key="py" value="10543" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -64,7 +62,7 @@
           <entry key="CSS" value="53" />
           <entry key="HTML" value="1517" />
           <entry key="JavaScript" value="7" />
-          <entry key="Python" value="8029" />
+          <entry key="Python" value="10543" />
         </counts>
       </usages-collector>
     </session>
@@ -106,16 +104,7 @@
         <entry file="file://$PROJECT_DIR$/research/views/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="89">
-              <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/research/views/scraper.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -123,11 +112,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/research/views/spyder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="127" column="86" selection-start-line="127" selection-start-column="86" selection-end-line="127" selection-end-column="86" />
+            <state relative-caret-position="110">
+              <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <marker date="1536708373270" expanded="true" signature="3459:5829" ph="..." />
+                <marker date="1536881087451" expanded="true" signature="3279:7221" ph="..." />
+                <marker date="1536881087451" expanded="true" signature="5729:7221" ph="..." />
               </folding>
             </state>
           </provider>
@@ -188,31 +178,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="research" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="research" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -364,14 +330,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.21062271" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42857143" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.6938776" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -460,13 +425,6 @@
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/__future__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/research/views/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/research/views/scraper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -474,13 +432,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/research/views/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/research/views/spyder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="127" column="86" selection-start-line="127" selection-start-column="86" selection-end-line="127" selection-end-column="86" />
+        <state relative-caret-position="110">
+          <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <marker date="1536708373270" expanded="true" signature="3459:5829" ph="..." />
+            <marker date="1536881087451" expanded="true" signature="3279:7221" ph="..." />
+            <marker date="1536881087451" expanded="true" signature="5729:7221" ph="..." />
           </folding>
         </state>
       </provider>

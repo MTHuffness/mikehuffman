@@ -1,23 +1,21 @@
 import requests
 from bs4 import BeautifulSoup as soup
+import numpy as np
 import pandas as pd
 from datetime import timedelta
 import time
 import re
-from tabulate import tabulate
 
 pd.set_option('display.max_columns', 30)
-pd.set_option('display.max_rows', 30)
+pd.set_option('display.max_rows', 100)
 pd.set_option('display.width', 1000)
 
-expire_after = timedelta(days=1)
-#requests_cache.install_cache('nobel_pages', backend='sqlite', expire_after=expire_after)
 
-symbol = 'nvda'
+symbol = 'tsla'
 form = '10-Q'
-financial_report = 'Consolidated Balance Sheets (Unaudited)'
 base_url = 'https://www.sec.gov'
 url = 'https://www.sec.gov/cgi-bin/browse-edgar?CIK={}&owner=exclude&action=getcompany&Find=Search'.format(symbol)
+location = []
 
 
 def beautiful_soup_generator(x):
@@ -113,7 +111,7 @@ def retrieve_all_tables(x):
             row = [tr.text.strip() for tr in tds]
             data_list.append(row)
         data_frame = pd.DataFrame(data_list)
-        data_frame = data_frame.set_index(data_frame[0])
+        data_frame = data_frame.set_index(data_frame.loc[:, 0])
         list_of_dataframes.append(data_frame)
     return list_of_dataframes
 
@@ -135,7 +133,7 @@ def retrieve_financial_statements(x):
             financial_reports.append(each_df)
 
     for each_df in x:
-        if ('revenues' in each_df.index.map(str.lower)
+        if ('revenues' in each_df.index.map(str.lower) or 'revenue' in each_df.index.map(str.lower)
             or 'revenues:' in each_df.index.map(str.lower) or 'net sales' in each_df.index.map(str.lower)) \
                 and 'net income' in each_df.index.map(str.lower):
             financial_reports.append(each_df)
@@ -150,6 +148,41 @@ def retrieve_financial_statements(x):
     return financial_reports
 
 
+def clean_financial_data(x):
+    """
+
+    :param x:
+    :return:
+    """
+    # clean the data
+    x.replace('', np.nan, inplace=True)  # replace all empty strings with NaN for row/column removal
+    x = x.dropna(axis=1, how='all')
+    x = x.dropna(axis=0, how='all')
+    x = x.fillna('')  # replace all the NaN back to a empty string for concatenation
+    x = x.drop(x.iloc[:, [0]], axis=1)  # drop the duplicate column that was moved to be an index
+    months = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June',
+              7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'}
+    # pull the row and column for the values that contain months. this is to have the dataframe
+    # automatically use this location to combine columns together under the appropriate month.
+    for num, month in months.items():
+        for number in range(len(x.iloc[0, :])):
+            for item in x.iloc[:, number].str.contains(month):
+                if item:
+                    location.append(number)
+    location.append(len(x.iloc[0, :]))
+    x['First month'] = x.iloc[:, location[0]] + x.iloc[:, location[0] + 1]
+    x['Second month'] = x.iloc[:, location[1]] + x.iloc[:, location[1] + 1] + x.iloc[:, location[1] + 2]
+    y = x.filter(['First month', 'Second month'], axis=1)
+    y.columns = y.iloc[0, :]
+
+    return y
+
+    # steps to combine the columns
+    # x.astype(str)
+    # x['July 2018'] = x[1] + x[2]
+    # x['January 2018'] = x[3] + x[4] + x[5] + x[6] + x[7]
+
+
 full_form_links = [get_company_financial_link(beautiful_soup_generator(x)) for x in broad_form_links]
 print(full_form_links)
 
@@ -159,4 +192,10 @@ get_every_form_on_the_statement = retrieve_all_tables(bs4_data)
 
 get_three_financial_statements = retrieve_financial_statements(get_every_form_on_the_statement)
 print(len(get_three_financial_statements))
-print(get_three_financial_statements)
+#print(get_three_financial_statements)
+bs = get_three_financial_statements
+
+cs = clean_financial_data(bs[1])
+print(cs)
+print()
+print(location)

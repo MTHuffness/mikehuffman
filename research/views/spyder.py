@@ -5,17 +5,19 @@ import pandas as pd
 from datetime import timedelta
 import time
 import re
+from collections import defaultdict
 
 pd.set_option('display.max_columns', 30)
 pd.set_option('display.max_rows', 100)
 pd.set_option('display.width', 1000)
 
 
-symbol = 'tsla'
-form = '10-Q'
+symbol = 'aapl'
+form = '10-q'
 base_url = 'https://www.sec.gov'
 url = 'https://www.sec.gov/cgi-bin/browse-edgar?CIK={}&owner=exclude&action=getcompany&Find=Search'.format(symbol)
 location = []
+month_list = []
 
 
 def beautiful_soup_generator(x):
@@ -129,7 +131,9 @@ def retrieve_financial_statements(x):
     for each_df in x:
         if 'total assets' in each_df.index.map(str.lower) and 'total liabilities' in each_df.index.map(str.lower) \
                 or 'current assets' in each_df.index.map(str.lower) \
-                and 'current liabilities' in each_df.index.map(str.lower):
+                and 'current liabilities' in each_df.index.map(str.lower)\
+                or 'current assets:' in each_df.index.map(str.lower) \
+                and 'current liabilities:' in each_df.index.map(str.lower):
             financial_reports.append(each_df)
 
     for each_df in x:
@@ -150,9 +154,12 @@ def retrieve_financial_statements(x):
 
 def clean_financial_data(x):
     """
-
-    :param x:
-    :return:
+    This function looks to remove any unnecessary blemishes from the financial document. First
+    it cleans and rows or columns with no data, then drops any repetitive columns. The function
+    also searches for where the months are in the statement and works to build a list of the
+    referenced months in the statement & where they are located.
+    :param x: The uncleaned financial statement returned from retrieve_financial_statements()
+    :return: a cleaned version of the statement.
     """
     # clean the data
     x.replace('', np.nan, inplace=True)  # replace all empty strings with NaN for row/column removal
@@ -160,42 +167,84 @@ def clean_financial_data(x):
     x = x.dropna(axis=0, how='all')
     x = x.fillna('')  # replace all the NaN back to a empty string for concatenation
     x = x.drop(x.iloc[:, [0]], axis=1)  # drop the duplicate column that was moved to be an index
-    months = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June',
-              7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'}
+    month = ['January', 'February', 'March', 'April', 'May', 'June',
+             'July', 'August', 'September', 'October', 'November', 'December']
     # pull the row and column for the values that contain months. this is to have the dataframe
     # automatically use this location to combine columns together under the appropriate month.
-    for num, month in months.items():
-        for number in range(len(x.iloc[0, :])):
-            for item in x.iloc[:, number].str.contains(month):
+    for number in range(len(x.iloc[0, :])):
+        for z in month:
+            for item in x.iloc[:, number].str.contains(z):
                 if item:
+                    month_list.append(z)
                     location.append(number)
     location.append(len(x.iloc[0, :]))
-    x['First month'] = x.iloc[:, location[0]] + x.iloc[:, location[0] + 1]
-    x['Second month'] = x.iloc[:, location[1]] + x.iloc[:, location[1] + 1] + x.iloc[:, location[1] + 2]
-    y = x.filter(['First month', 'Second month'], axis=1)
-    y.columns = y.iloc[0, :]
 
-    return y
-
-    # steps to combine the columns
-    # x.astype(str)
-    # x['July 2018'] = x[1] + x[2]
-    # x['January 2018'] = x[3] + x[4] + x[5] + x[6] + x[7]
+    return x
 
 
+def create_column_dict(x):
+    """
+    This function is built to determine how many months are contained in the financial data
+    and to split the filing so that the columns combined are for the appropriately referened
+    month.
+    :return: a dictionary of lists. each dict key is the index for the month and the values
+    are the columns of data that need to be combined for that index. Also returns the list
+    of columns which will be needed when you remove them after the columns are combined.
+    """
+    indexer = defaultdict(list)
+    for index, item in enumerate(location):
+        if item != location[-1]:
+            end_point = location[index + 1]
+            while item < end_point:
+                indexer[index].append(item)
+                item += 1
+        else:
+            break
+    return indexer, location
+
+
+def merge_columns_together(pack, x):
+    """
+
+    :param x:
+    :return:
+    """
+    fin_dict = {month_list[key]: x.iloc[:, lis[:]].sum(axis=1) for key, lis in pack[0].items()}
+    fin_db = pd.DataFrame(fin_dict)
+    return fin_db
+
+
+"""PROCESS"""
+
+# CRAWL FOR THE LINKS OF THE 10 MOST RECENT STATEMENTS
 full_form_links = [get_company_financial_link(beautiful_soup_generator(x)) for x in broad_form_links]
-print(full_form_links)
+#print(full_form_links)
 
+# PULL THE FIRST STATEMENT OF THE 10 STATEMENTS FOR CLEANING
 bs4_data = beautiful_soup_generator(full_form_links[0])
+
+# CRAWL THE FINANCIAL FILING AND PULL EVERY TABLE
 get_every_form_on_the_statement = retrieve_all_tables(bs4_data)
 # print(get_that_form)
 
+# GRAB ONLY THE FINANCIAL STATEMENTS I NEED
 get_three_financial_statements = retrieve_financial_statements(get_every_form_on_the_statement)
-print(len(get_three_financial_statements))
-#print(get_three_financial_statements)
+# print(len(get_three_financial_statements))
+# print(get_three_financial_statements)
 bs = get_three_financial_statements
 
-cs = clean_financial_data(bs[1])
-print(cs)
-print()
-print(location)
+# CLEAN THE STATEMENT
+cs = clean_financial_data(bs[0])
+
+# LIST FORMAT FOR THE COLUMNS AND MONTHS
+# print(location)
+# print(month_list)
+
+# CREATE A DICTIONARY WITH THE KEYS BEING THE NUMBER OF COLUMNS NEEDED AND THE VALUES BEING
+# HOW MANY COLUMNS NEED TO BE CONDENSED INTO IT
+column_pack = create_column_dict(cs)
+# print(column_pack)
+
+# FINAL CLEAN - MERGE COLUMNS TOGETHER INTO A NEW DATABASE
+final = merge_columns_together(column_pack, cs)
+print(final)

@@ -90,7 +90,7 @@ def get_company_financial_link(x):
 # variables
 
 
-symbol = 'aapl'
+symbol = 'tsla'
 form = '10-q'
 base_url = 'https://www.sec.gov'
 url = 'https://www.sec.gov/cgi-bin/browse-edgar?CIK={}&owner=exclude&action=getcompany&Find=Search'.format(symbol)

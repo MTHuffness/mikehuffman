@@ -20,20 +20,16 @@ import string
 
 def clean_and_merge(x):
     location = []
-    month_list = []
-    new_month_list = []
     date = []
-    month_pattern = re.compile(r'\\xa[0-9]+')
+    year = []
+    full_date = []
     year_pattern = re.compile('2[0-9][0-9][0-9]')
-    # print(bool(year_pattern.match("2018")))
 
     x.replace('', np.nan, inplace=True)  # replace all empty strings with NaN for row/column removal
     x = x.dropna(axis=1, how='all')
     x = x.dropna(axis=0, how='all')
     x = x.fillna('')  # replace all the NaN back to a empty string for concatenation
     x = x.drop(x.iloc[:, [0]], axis=1)  # drop the duplicate column that was moved to be an index
-    month = ['January', 'February', 'March', 'April', 'May', 'June',
-             'July', 'August', 'September', 'October', 'November', 'December']
 
     # searches for the month in each column of the top row, if it is there, add the month
     # name and its location for column naming and column combining purposes.
@@ -41,11 +37,24 @@ def clean_and_merge(x):
         if column:
             date.append(column)
             location.append(key)
-            #[x.encode('utf-8') for x in date]
-    """for item in date[1]:
-        item.encode('ascii', errors='ignore')"""
     location.append(len(x.iloc[0, :]))
 
+    # ISSUE
+    """depending on whether or not the year is added into the top row, a different 
+    method is required to create the column title:
+        year in:
+            fun_db needs columns to be date and fin_dict draws from date
+        year not in:
+            replace date in the above spots with full_date"""
+
+    x.replace(np.nan, '', inplace=True)  # replace all empty strings with NaN for row/column removal
+
+    for key, yr in enumerate(x.iloc[1]):
+        if yr and bool(year_pattern.match(yr)):
+            year.append(yr)
+
+    for lis in range(len(date)):
+        full_date.append(date[lis] + ' ' + year[lis])
 
     # NOTE
     """looks like i need to match the index of the list date with the index of
@@ -64,13 +73,13 @@ def clean_and_merge(x):
         else:
             break
 
-    fin_dict = {date[key]: x.iloc[:, lis[:]].sum(axis=1)
+    fin_dict = {full_date[key]: x.iloc[:, lis[:]].sum(axis=1)
                 for key, lis in indexer.items()}
-    fin_db = pd.DataFrame(fin_dict, columns=date)
-    # fin_db.columns = new_month_list
+    fin_db = pd.DataFrame(fin_dict, columns=full_date)
+    # fin_db = pd.DataFrame(fin_dict)
     fin_db = fin_db.drop(fin_db.index[0])
 
-    return fin_db, new_month_list
+    return fin_db, date
 
 
 """PROCESS FOR A SINGLE STATEMENT"""

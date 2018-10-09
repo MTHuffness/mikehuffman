@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="58d25f69-4167-4b3d-9d5c-00553c6829b5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/views/spyder.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/views/spyder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/bs.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/bs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/crawler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site_app/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/site_app/templates/home.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +14,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/project$spyder.coverage" NAME="spyder Coverage Results" MODIFIED="1537238095928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research/views" />
+    <SUITE FILE_PATH="coverage/project$bs.coverage" NAME="bs Coverage Results" MODIFIED="1539102109451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research" />
+    <SUITE FILE_PATH="coverage/project$crawler.coverage" NAME="crawler Coverage Results" MODIFIED="1539017176424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research" />
+    <SUITE FILE_PATH="coverage/project$spyder.coverage" NAME="spyder Coverage Results" MODIFIED="1538318176732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research/views" />
+    <SUITE FILE_PATH="coverage/project$balance_sheet.coverage" NAME="balance_sheet Coverage Results" MODIFIED="1538319818406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research/views" />
     <SUITE FILE_PATH="coverage/project$scraper.coverage" NAME="scraper Coverage Results" MODIFIED="1536708075046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research/views" />
     <SUITE FILE_PATH="coverage/project$views.coverage" NAME="views Coverage Results" MODIFIED="1536436892968" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research" />
   </component>
@@ -26,46 +28,48 @@
     <session id="538013104">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.5" value="6" />
-          <entry key="project.open.time.6" value="6" />
+          <entry key="project.closed" value="20" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.5" value="7" />
+          <entry key="project.open.time.6" value="12" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.opened" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="5" />
-          <entry key="html" value="16" />
+          <entry key="html" value="17" />
           <entry key="jpg" value="4" />
           <entry key="js" value="2" />
-          <entry key="py" value="19" />
+          <entry key="py" value="52" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="5" />
-          <entry key="HTML" value="16" />
+          <entry key="HTML" value="17" />
           <entry key="Image" value="4" />
           <entry key="JavaScript" value="2" />
-          <entry key="Python" value="19" />
+          <entry key="Python" value="52" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="Django Console" value="56" />
           <entry key="css" value="57" />
-          <entry key="html" value="1715" />
+          <entry key="html" value="1769" />
           <entry key="js" value="7" />
-          <entry key="py" value="15114" />
+          <entry key="py" value="22829" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="57" />
-          <entry key="HTML" value="1715" />
+          <entry key="HTML" value="1769" />
           <entry key="JavaScript" value="7" />
-          <entry key="Python" value="15114" />
+          <entry key="Python" value="22885" />
         </counts>
       </usages-collector>
     </session>
@@ -104,24 +108,36 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/research/views/views.py">
+        <entry file="file://$PROJECT_DIR$/research/crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+            <state relative-caret-position="123">
+              <caret line="61" column="46" selection-start-line="61" selection-start-column="46" selection-end-line="61" selection-end-column="46" />
+              <folding>
+                <marker date="1539097630684" expanded="true" signature="1017:1023" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/research/statement_search.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="e#197#277#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/research/views/spyder.py">
+        <entry file="file://$PROJECT_DIR$/research/bs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3289">
-              <caret line="223" column="55" lean-forward="true" selection-start-line="223" selection-start-column="55" selection-end-line="223" selection-end-column="55" />
+            <state relative-caret-position="977">
+              <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
-                <marker date="1537237958275" expanded="true" signature="3331:8581" ph="..." />
-                <marker date="1537237958275" expanded="true" signature="5928:8581" ph="..." />
-                <marker date="1537237958275" expanded="true" signature="7471:8278" ph="..." />
+                <element signature="e#326#368#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,9 +148,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
         <option value="CSS File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -150,7 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/site_app/templates/home.html" />
         <option value="$PROJECT_DIR$/site_app/static/js/resume.js" />
         <option value="$PROJECT_DIR$/site_app/static/css/resume.css" />
         <option value="$PROJECT_DIR$/static/js/resume.js" />
@@ -160,11 +175,19 @@
         <option value="$PROJECT_DIR$/static/research/index.html" />
         <option value="$PROJECT_DIR$/project/urls.py" />
         <option value="$PROJECT_DIR$/site_app/templates/base.html" />
-        <option value="$PROJECT_DIR$/project/settings.py" />
         <option value="$PROJECT_DIR$/static/css/research.css" />
         <option value="$PROJECT_DIR$/site_app/templates/research.html" />
         <option value="$PROJECT_DIR$/research/models.py" />
         <option value="$PROJECT_DIR$/research/views/spyder.py" />
+        <option value="$PROJECT_DIR$/research/views/balance_sheet.py" />
+        <option value="$PROJECT_DIR$/research/spyder.py" />
+        <option value="$PROJECT_DIR$/site_app/templates/home.html" />
+        <option value="$PROJECT_DIR$/research/full_scrape.py" />
+        <option value="$PROJECT_DIR$/research/balance_sheet.py" />
+        <option value="$PROJECT_DIR$/project/settings.py" />
+        <option value="$PROJECT_DIR$/research/statement_search.py" />
+        <option value="$PROJECT_DIR$/research/crawler.py" />
+        <option value="$PROJECT_DIR$/research/bs.py" />
       </list>
     </option>
   </component>
@@ -180,8 +203,7 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="632" />
-    <option name="width" value="1048" />
+    <option name="width" value="836" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -209,28 +231,6 @@
               <item name="project" type="462c0819:PsiDirectoryNode" />
               <item name="research" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="site_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="site_app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -249,11 +249,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/research" />
       <recent name="$PROJECT_DIR$/research/views" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/project/static" />
       <recent name="$PROJECT_DIR$/site_app/static" />
-      <recent name="$PROJECT_DIR$/site_app/media" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -268,7 +268,73 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.spyder">
+  <component name="RunManager" selected="Python.bs">
+    <configuration name="balance_sheet" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/research/views" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/research/balance_sheet.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="bs" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/research" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/research/bs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="crawler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/research" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/research/crawler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="scraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -304,29 +370,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/research/views/spyder.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="project" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/research" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/research/views/views.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/research/spyder.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -361,15 +405,19 @@
     </configuration>
     <list>
       <item itemvalue="Django server.project" />
-      <item itemvalue="Python.views" />
       <item itemvalue="Python.spyder" />
       <item itemvalue="Python.scraper" />
+      <item itemvalue="Python.balance_sheet" />
+      <item itemvalue="Python.crawler" />
+      <item itemvalue="Python.bs" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.bs" />
+        <item itemvalue="Python.balance_sheet" />
+        <item itemvalue="Python.crawler" />
         <item itemvalue="Python.spyder" />
         <item itemvalue="Python.scraper" />
-        <item itemvalue="Python.views" />
       </list>
     </recent_temporary>
   </component>
@@ -386,10 +434,20 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.17460318" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.17643468" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -397,21 +455,45 @@
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="5" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.32959184" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32871288" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Python Console" order="11" />
-      <window_info anchor="bottom" id="manage.py@project" order="12" weight="0.32959184" />
+      <window_info anchor="bottom" id="manage.py@project" order="10" weight="0.32959184" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3295129" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Run" order="5" weight="0.496337" />
+      <window_info active="true" anchor="right" id="Run" order="5" sideWeight="0.4397959" visible="true" weight="0.50549453" />
+      <window_info anchor="right" x="434" y="35" width="812" height="980" id="Python Console" order="6" sideWeight="0.5602041" side_tool="true" weight="0.4957265" />
+      <window_info anchor="right" id="Terminal" order="7" weight="0.514652" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17460318" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.32959184" />
+      <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32871288" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="manage.py@project" order="10" weight="0.32959184" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.3295129" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Run" order="5" sideWeight="0.4397959" weight="0.486569" />
+      <window_info anchor="right" x="434" y="35" width="812" height="980" id="Python Console" order="6" sideWeight="0.5602041" side_tool="true" weight="0.4957265" />
+      <window_info anchor="right" id="Terminal" order="7" visible="true" weight="0.514652" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -459,13 +541,6 @@
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/__future__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/research/views/scraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../lib/python3.6/site-packages/pandas/core/indexing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
@@ -497,13 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -532,13 +600,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site_app/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1230">
-          <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/site_app/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -546,32 +607,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/research/views/views.py">
+    <entry file="file://$PROJECT_DIR$/research/views/scraper.py" />
+    <entry file="file://$PROJECT_DIR$/research/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        <state relative-caret-position="345">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/research/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/research/balance_sheet.py" />
+    <entry file="file://$PROJECT_DIR$/site_app/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="14" lean-forward="true" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="36" lean-forward="true" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/research/spyder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2472">
+          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
           <folding>
-            <marker date="1537208662113" expanded="true" signature="30:31" ph="..." />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/research/views/spyder.py">
+    <entry file="file://$PROJECT_DIR$/research/full_scrape.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3289">
-          <caret line="223" column="55" lean-forward="true" selection-start-line="223" selection-start-column="55" selection-end-line="223" selection-end-column="55" />
+        <state relative-caret-position="-2757">
+          <caret line="7" column="35" lean-forward="true" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/research/statement_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1537237958275" expanded="true" signature="3331:8581" ph="..." />
-            <marker date="1537237958275" expanded="true" signature="5928:8581" ph="..." />
-            <marker date="1537237958275" expanded="true" signature="7471:8278" ph="..." />
+            <element signature="e#197#277#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/research/crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="61" column="46" selection-start-line="61" selection-start-column="46" selection-end-line="61" selection-end-column="46" />
+          <folding>
+            <marker date="1539097630684" expanded="true" signature="1017:1023" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/research/bs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="977">
+          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
+          <folding>
+            <element signature="e#326#368#0" expanded="true" />
           </folding>
         </state>
       </provider>

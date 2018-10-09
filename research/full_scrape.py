@@ -6,18 +6,17 @@ from datetime import timedelta
 import time
 import re
 from collections import defaultdict
+from functools import reduce
+from datetime import datetime
 
 pd.set_option('display.max_columns', 30)
 pd.set_option('display.max_rows', 100)
 pd.set_option('display.width', 1000)
 
-
-symbol = 'aapl'
+symbol = 'tsla'
 form = '10-q'
 base_url = 'https://www.sec.gov'
 url = 'https://www.sec.gov/cgi-bin/browse-edgar?CIK={}&owner=exclude&action=getcompany&Find=Search'.format(symbol)
-location = []
-month_list = []
 
 
 def beautiful_soup_generator(x):
@@ -36,31 +35,29 @@ def beautiful_soup_generator(x):
 
 edgar_search_page = beautiful_soup_generator(url)
 
+"""def get_company_cik(x):
 
-def get_company_cik(x):
-    """
     A function that grabs the CIK for a company based on the Symbol derived URL.
 
     :param x: The bsoup object returned from company search().
     :return: the string format of the CIK for the company.
-    """
+
 
     full_cik = x.find('div', {'class': 'companyInfo'}).find('a').text
     cik = [x for x in full_cik.split() if x.isdigit()]
-    return cik[0]
-
-
-cik = get_company_cik(edgar_search_page)
-edgar_company_filing_page = 'https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&' \
-       'CIK={cik}&' \
-       'type={form}&dateb=&owner=exclude&count=10'.format(cik=cik, form=form)
-bs4 = beautiful_soup_generator(edgar_company_filing_page)
+    return cik[0]"""
 
 
 def get_company_content(x):
     """A Function that takes in the URL and returns the Company Info from the filing search page."""
     content = x.find('div', {'class': 'companyInfo'})
-    return content
+    full_company_name = content.find('span', {'class': 'companyName'}).text
+    company_info = full_company_name.split()
+    cik = company_info[3]
+    company_name = company_info[0] + " " + company_info[1]
+    # cik_link = content.find('a').text
+    # cik = [x for x in cik_link.split() if x.isdigit()]
+    return company_name, cik
 
 
 def get_company_documents_page_links(x):
@@ -78,6 +75,13 @@ def get_company_documents_page_links(x):
     return link_list
 
 
+company_name, cik = get_company_content(edgar_search_page)
+edgar_company_filing_page = 'https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&' \
+                            'CIK={cik}&' \
+                            'type={form}&dateb=&owner=exclude&count=10'.format(cik=cik, form=form)
+bs4 = beautiful_soup_generator(edgar_company_filing_page)
+company_information = get_company_content(edgar_search_page)
+print(company_name, ",", cik)
 broad_form_links = get_company_documents_page_links(bs4)
 
 
@@ -127,70 +131,63 @@ def retrieve_financial_statements(x):
     :param x: the list of databases from the retrieve_all_tables() function
     :return: a list of databases that contain only the 3 primary financial statements.
     """
-    financial_reports = []
+    balance_sheets = []
+    income_statements = []
+    cash_flow_statements = []
     for each_df in x:
         if 'total assets' in each_df.index.map(str.lower) and 'total liabilities' in each_df.index.map(str.lower) \
                 or 'current assets' in each_df.index.map(str.lower) \
-                and 'current liabilities' in each_df.index.map(str.lower)\
+                and 'current liabilities' in each_df.index.map(str.lower) \
                 or 'current assets:' in each_df.index.map(str.lower) \
                 and 'current liabilities:' in each_df.index.map(str.lower):
-            financial_reports.append(each_df)
+            balance_sheets.append(each_df)
 
     for each_df in x:
         if ('revenues' in each_df.index.map(str.lower) or 'revenue' in each_df.index.map(str.lower)
             or 'revenues:' in each_df.index.map(str.lower) or 'net sales' in each_df.index.map(str.lower)) \
-                and 'net income' in each_df.index.map(str.lower):
-            financial_reports.append(each_df)
+                and ('net income' in each_df.index.map(str.lower) or 'gross profit' in each_df.index.map(str.lower)
+                     or 'net loss' in each_df.index.map(str.lower)):
+            income_statements.append(each_df)
 
     for each_df in x:
         if 'cash flows from operating activities' in each_df.index.map(str.lower) \
                 or 'cash flows from operating activities:' in each_df.index.map(str.lower) \
                 or 'operating activities' in each_df.index.map(str.lower) \
                 or 'operating activities:' in each_df.index.map(str.lower):
-            financial_reports.append(each_df)
+            cash_flow_statements.append(each_df)
 
-    return financial_reports
+    return balance_sheets, income_statements, cash_flow_statements
 
 
-def clean_financial_data(x):
-    """
-    This function looks to remove any unnecessary blemishes from the financial document. First
-    it cleans and rows or columns with no data, then drops any repetitive columns. The function
-    also searches for where the months are in the statement and works to build a list of the
-    referenced months in the statement & where they are located.
-    :param x: The uncleaned financial statement returned from retrieve_financial_statements()
-    :return: a cleaned version of the statement.
-    """
-    # clean the data
+def clean_and_merge(x):
+    location = []
+    month_list = []
+    new_month_list = []
+    month_pattern = re.compile(r'\\xa[0-9]+')
+
     x.replace('', np.nan, inplace=True)  # replace all empty strings with NaN for row/column removal
     x = x.dropna(axis=1, how='all')
     x = x.dropna(axis=0, how='all')
     x = x.fillna('')  # replace all the NaN back to a empty string for concatenation
     x = x.drop(x.iloc[:, [0]], axis=1)  # drop the duplicate column that was moved to be an index
+    print(x)
     month = ['January', 'February', 'March', 'April', 'May', 'June',
              'July', 'August', 'September', 'October', 'November', 'December']
-    # pull the row and column for the values that contain months. this is to have the dataframe
-    # automatically use this location to combine columns together under the appropriate month.
+    # determine the number of columns in the financial statement and iterate the range
     for number in range(len(x.iloc[0, :])):
+        # iterate through each month from the month list
         for z in month:
+            # iterates through each column to see if the month is in it.
             for item in x.iloc[:, number].str.contains(z):
                 if item:
                     month_list.append(z)
+                    full_date = x.iloc[0, number]
+                    fixed_date = re.sub(month_pattern, "", full_date)
+                    new_month_list.append(fixed_date)
                     location.append(number)
     location.append(len(x.iloc[0, :]))
+    # print(new_month_list)
 
-    return x
-
-
-def create_column_dict(x):
-    """
-    This function is built to determine how many months are contained in the financial data
-    and to split the filing so that the columns combined are for the appropriately referened
-    month.
-    :return: a dictionary of lists. each dict key is the index for the month and the values
-    are the columns of data that need to be combined for that index. Also returns the list
-    of columns which will be needed when you remove them after the columns are combined.
-    """
     indexer = defaultdict(list)
     for index, item in enumerate(location):
         if item != location[-1]:
@@ -200,25 +197,22 @@ def create_column_dict(x):
                 item += 1
         else:
             break
-    return indexer, location
+
+    fin_dict = {new_month_list[key]: x.iloc[:, lis[:]].sum(axis=1)
+                for key, lis in indexer.items()}
+    fin_db = pd.DataFrame(fin_dict, columns=new_month_list)
+    # fin_db.columns = new_month_list
+    fin_db = fin_db.drop(fin_db.index[0])
+    return fin_db, new_month_list
 
 
-def merge_columns_together(pack, x):
-    """
+# CRAWL FOR THE LINKS OF A NUMBER OF MOST RECENT STATEMENTS
+full_form_links = [get_company_financial_link(beautiful_soup_generator(x))
+                   for x in broad_form_links]
+# print(full_form_links)
 
-    :param x:
-    :return:
-    """
-    fin_dict = {month_list[key]: x.iloc[:, lis[:]].sum(axis=1) for key, lis in pack[0].items()}
-    fin_db = pd.DataFrame(fin_dict)
-    return fin_db
+"""PROCESS fOR A SINGLE STATEMENT"""
 
-
-"""PROCESS"""
-
-# CRAWL FOR THE LINKS OF THE 10 MOST RECENT STATEMENTS
-full_form_links = [get_company_financial_link(beautiful_soup_generator(x)) for x in broad_form_links]
-#print(full_form_links)
 
 # PULL THE FIRST STATEMENT OF THE 10 STATEMENTS FOR CLEANING
 bs4_data = beautiful_soup_generator(full_form_links[0])
@@ -231,20 +225,29 @@ get_every_form_on_the_statement = retrieve_all_tables(bs4_data)
 get_three_financial_statements = retrieve_financial_statements(get_every_form_on_the_statement)
 # print(len(get_three_financial_statements))
 # print(get_three_financial_statements)
-bs = get_three_financial_statements
+bal, inc, cfw = get_three_financial_statements
 
 # CLEAN THE STATEMENT
-cs = clean_financial_data(bs[0])
+cbal, c_month = clean_and_merge(bal[0])
+# cinc = clean_financial_data(inc[0])
+# ccfw = clean_financial_data(cfw[0])
+print(cbal)
 
-# LIST FORMAT FOR THE COLUMNS AND MONTHS
-# print(location)
-# print(month_list)
+"""PROCESS fOR MULTIPLE STATEMENTS"""
 
-# CREATE A DICTIONARY WITH THE KEYS BEING THE NUMBER OF COLUMNS NEEDED AND THE VALUES BEING
-# HOW MANY COLUMNS NEED TO BE CONDENSED INTO IT
-column_pack = create_column_dict(cs)
-# print(column_pack)
+"""bal_list = []
+for each in full_form_links:
+    bs4_data = beautiful_soup_generator(each)
+    get_every_form_on_the_statement = retrieve_all_tables(bs4_data)
+    get_three_financial_statements = retrieve_financial_statements(get_every_form_on_the_statement)
+    bal, inc, cfw = get_three_financial_statements
+    cbal, date_bal = clean_and_merge(bal[0])
+    bal_list.append(cbal)"""
 
-# FINAL CLEAN - MERGE COLUMNS TOGETHER INTO A NEW DATABASE
-final = merge_columns_together(column_pack, cs)
-print(final)
+"""
+# merge all the data frames together into a single data frame
+bst = pd.concat(bal_list, axis=1, sort=False)
+# remove all the duplicate columns
+bst = bst.loc[:, ~bst.columns.duplicated()]
+# bst.columns.astype('datetime64')
+print(bst)"""
